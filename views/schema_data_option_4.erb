@@ -1,0 +1,42 @@
+<h1>Additional Information Is Required For Column Heads File and Data File</h1>
+<form role="form" action='/datasource/complete' method='post' class="form-inline well">
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="colHeadFileName">One Time File Path For Col Heads</label>
+		<input type="text" class="form-control" id="colHeadFileName"  name="colHeadFileName" placeholder="/foo/bar/wah/doo/colheads.csv">
+	</div>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="colHeadDelimiter">Delimiter Used For Column Heads Above</label>
+	<select class="form-control" name = "colHeadDelimiter">
+		<option value="1">Comma</option>
+		<option value="2">Tab</option>
+		<option value="3">Pipe</option>
+		<option value="4">Space</option>
+		<option value="5">Semicolon</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="dataInputFileName">Name of Data File if Different Than Input File</label>
+		<input type="text" class="form-control" id="dataInputFileName"  name="dataInputFileName" placeholder="data.tsv">
+	</div>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="dataDelimiter">Delimiter Used in Data Files</label>
+	<select class="form-control" name = "dataDelimiter">
+		<option value="1">Comma</option>
+		<option value="2">Tab</option>
+		<option value="3">Pipe</option>
+		<option value="4">Space</option>
+		<option value="5">Semicolon</option>
+	</select>
+	<br>
+	<br>
+	<br>
+  <input class="btn primary" type='submit' value='Submit'>	
+</form>

@@ -1,0 +1,112 @@
+<h1>Add an ETL Datasource</h1>
+<span class="help-block">We shall attempt to collect enough information from you to do most of the work for you, so you are free to concentrate on the exceptions that only humans can do. </span>
+<!-- found this for making some fields conditional https://github.com/OliverJAsh/FormAccordion -->
+
+<br>
+<br>
+<br>
+<form role="form" action='/datasource/complete' method='post' class="form-inline well">
+
+	<label class="control-label" for="targetDataTupe">Select Target Data Type</label>
+	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
+	<select class="form-control" id = "targetDataTupe"  name="targetDataTupe">
+		<option value="1">Hadoop Hive Table</option>
+		<option value="2" disabled="true">Google Big Table</option>
+		<option value="3" disabled="true">Amazon Dynamo DB</option>
+		<option value="4" disabled="true">Cassandra</option>
+		<option value="4" disabled="true">Couchbase</option>
+		<option value="5" disabled="true">DreamObjects</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="dateFieldSource">Select Date Field Type</label>
+	<span class="help-block">Data is typically date partitioned when, or a date field is added, in big data use cases</span>
+	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
+	<select class="form-control" name = "dateFieldSource">
+		<option value="1">None, not enough data expected to require date partition</option>
+		<option value="2">Use yyyymmdd found in the file name</option>
+		<option value="3">Use current date</option>
+		<option value="3">Use date from a field named below</option>
+		<option value="4" disabled="true">Use current year plus mmdd found in file name</option>
+		<option value="5" disabled="true">Use yesterday's date</option>
+		<option value="6" disabled="true">Other [specify below]</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="uniqueInputFolder">Unique Input Folder</label>
+		<span class="help-block">Select a folder for this one datasource only, it will be polled every 60 seconds and the file scooped up if found. </span>
+		<input type="text" class="form-control" id="uniqueInputFolder"  name="uniqueInputFolder" placeholder="/my/folder/perfectlyunique">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="isArchived" name="isArchived">
+			Is input file to be archived for re-running later in case of a data loss? </label>
+	</div>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="schemaData">Select Schema/Data Combination</label>
+	<span class="help-block">There are many more possible schema/data combinations thans the ones shown below</span>
+	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
+	<span class="help-block">If yours is not mentioned below, you would have to hand convert it to one of these below to use current automation</span>
+	<select class="form-control" id = "schemaData" name="schemaData">
+		<option value="1">Pasted column headers for schema, delimited flat file for data</option>
+		<option value="2">Delimited flat file always includes column headers as first row</option>
+		<option value="3">Delimited column headers file delivered every time, with delimited flat file for data, each named separately</option>
+		<option value="4">Delimited column headers file selected with this UI, with delimited flat file for data, each named separately</option>
+		<option value="5">One time avro schema selected with this UI, delimited flat file for data</option>
+		<option value="6">One time avro schema selected with this UI, json data file for data</option>
+		<option value="7" disabled="true">Xml schema selected with this UI, xml data file for data</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="authorName">Author</label>
+		<input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Carrie White">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="uniqueInputFolder">Test Data File</label>
+		<span class="help-block">Paste in the exact full path to the sample test data file.</span>
+		<input type="text" class="form-control" id="exampleInputFile"  name="exampleInputFile" placeholder="/my/folder/foo_data_20121130">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="hasMd5"  name="hasMd5">
+			Is an md5 of the same filename + ".md5" to be provided with each data file, to be checked against? </label>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="recordValidation" name="recordValidation">
+			If a record fails validate against schema, should the entire import be scrapped? Or continue to next record? </label>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="otherPartitions"  name="otherPartitions">
+			Are there other partitions to be extracted and added to this process? </label>
+	</div>
+	<br>
+	<br>
+	<span class="help-block">Please check all answers for completion before submiting. This is not a robust app. If you have empty fields it will clear every field and make you redo all answeres</span> 
+	<button type="submit"  class="btn btn-primary">
+		Primary
+	</button>
+</form>

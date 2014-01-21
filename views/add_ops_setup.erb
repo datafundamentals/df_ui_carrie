@@ -1,0 +1,90 @@
+<h1>Add a Dev Metazone</h1>
+<span class="help-block">We shall attempt to collect enough information from you to do most of the work for you, so you are free to concentrate on the exceptions that only humans can do. </span>
+<br>
+<br>
+<br>
+<form role="form" action='/opsetup/complete' method='post' class="form-inline well">
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="authorName">Author</label>
+		<input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Carrie White">
+	</div>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="persistOption">Select Persistence or Processing Engine</label>
+	<span class="help-block">If you select one of the hadoop vms, please start this vm now.</span>
+	<select class="form-control" id = "persistOption"  name="persistOption">
+		<option value="1">Hadoop Cloudera</option>
+		<option value="2">Hadoop Hortonworks</option>
+		<option value="3" disabled="true">Hadoop BentoBox</option>
+		<option value="4" disabled="true">Storm</option>
+		<option value="5">File</option>
+		<option value="6">Postgres SQL</option>
+		<option value="7" disabled="true">Google Big Table</option>
+		<option value="8" disabled="true">Amazon Dynamo DB</option>
+		<option value="9" disabled="true">Cassandra</option>
+		<option value="10" disabled="true">Couchbase</option>
+		<option value="11" disabled="true">DreamObjects</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="globalDeployPrefOption">Choose a preferred dev deployment platform</label>
+	<span class="help-block">If you have a choice between where to set up your dev environments, where would that be?</span>
+	<span class="help-block">Some infrasture comes on it's own local VM, such as Cloudera Hadoop, and will thus ignore this choice</span>
+	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
+	<select class="form-control" name = "globalDeployPrefOption">
+		<option value="1">Default: Vagrant VM (VirtualBox)</option>
+		<option value="2">Hardware with CentOS</option>
+		<option value="2">Rackspace</option>
+		<option value="2">EC2</option>
+		<option value="2">Google App Engine</option>
+		<option value="2">Dream Compute</option>
+		<option value="2">Pivotal Cloud Foundry</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="routerOption">Select routing system</label>
+	<span class="help-block">There are many more possible schema/data combinations thans the ones shown below</span>
+	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
+	<span class="help-block"></span>
+	<select class="form-control" id = "routerOption" name="routerOption">
+		<option value="1">Camel</option>
+		<option value="2" disabled="true">Spring Integration</option>
+		<option value="3" disabled="true">JBoss Fuse</option>
+		<option value="4" disabled="true">Homegrown Java</option>
+		<option value="5" disabled="true">Homegrown Bash Scripts</option>
+		<option value="6" disabled="true">One more see notes</option>
+	</select>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="uniqueInputFolder">Test Data File</label>
+		<span class="help-block">Paste in the exact full path to the sample test data file.</span>
+		<input type="text" class="form-control" id="exampleInputFile"  name="exampleInputFile" placeholder="/my/folder/foo_data_20121130">
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="finishingEndPoint">Select routing system</label>
+	<span class="help-block">Please select finishing end point - or how far this should go</span>
+	<span class="help-block"></span>
+	<select class="form-control" id = "finishingEndPoint" name="finishingEndPoint">
+		<option value="1">Data Load ONLY</option>
+		<option value="2" disabled="true">Also Create Index Key</option>
+		<option value="3" disabled="true">Also Create Index with Index Key</option>
+		<option value="4" disabled="true">Also Create REST API with Index and Index Key</option>
+	</select>
+	<br>
+	<br>
+	<span class="help-block">Please check all answers for completion before submiting. This is not a robust app. If you have empty fields it will clear every field and make you redo all answeres</span> 
+	<button type="submit"  class="btn btn-primary">
+		Primary
+	</button>
+</form>
