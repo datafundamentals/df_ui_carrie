@@ -9,7 +9,7 @@ In its current state it is barely started, but it shall remain incomplete for it
 
 The UI is built using Bootstrap and Sinatra. The generation programs are written in Ruby. All three technologies are bran new technologies to the author of Carrie, and the hacky nature of the code should reflect this fact. Carrie is a demostration project and never intended to be anything close to production code.
 
-Choices Made By Disabled UI
+Choices in Context Shown By Disabled UI
 ====
 
 In the spirit of increasing the horror factor, Carrie provides a context for many of it's design decisions by showing disabled choices.
