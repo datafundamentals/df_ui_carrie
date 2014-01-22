@@ -1,24 +1,10 @@
-Hello!
+A few notes about Carrie
 ====
 
-This is a demonstrator for [Sinatra](http://www.sinatrarb.com/), [Twitter Bootstrap](http://twitter.github.com/bootstrap/), and [Font Awesome](http://fortawesome.github.io/Font-Awesome/). 
+Carrie is a demonstration project for automating some big data devops tasks such as setting up dev machines and writing automated ETL code to these same machines.
 
-Use it as a boilerplate to start your own apps.
+It is appropriately named after the horror movie of the same name. Automation should create the same kinds of feelings.
 
-Go!
-===
+In its current state it is barely started, but it shall remain incomplete for it's entire life. It is not intended as anything other than exploratory software. 
 
-Download and run sinatra-bootstrap:
-
-    git clone git@github.com:pokle/sinatra-bootstrap.git
-    
-    cd sinatra-bootstrap
-    bundle install             # To install sinatra
-    
-    bundle exec ruby app.rb    # To run the sample
-	
-Then open [http://localhost:4567/](http://localhost:4567/)
-
-What's next?
-============
-- Try the rerun gem to restart Sinatra automatically when you change source files: https://github.com/alexch/rerun
+The UI is built using Bootstrap and Sinatra. The generation programs are written in Ruby. All three technologies are bran new technologies to the author of Carrie, and the hacky nature of the code should reflect this fact. Carrie is a demostration project and never intended to be anything close to production code.
