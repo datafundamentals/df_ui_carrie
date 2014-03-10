@@ -1,3 +1,8 @@
+pre-requirements   
+
+* gem install sinatra
+* gem install rerun
+
 A few notes about Carrie
 ====
 
