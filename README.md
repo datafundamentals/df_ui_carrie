@@ -1,24 +1,36 @@
-Hello!
+pre-requirements   
+
+* gem install sinatra
+* gem install rerun
+
+A few notes about Carrie
 ====
 
-This is a demonstrator for [Sinatra](http://www.sinatrarb.com/), [Twitter Bootstrap](http://twitter.github.com/bootstrap/), and [Font Awesome](http://fortawesome.github.io/Font-Awesome/). 
+Carrie is a demonstration project for automating some big data devops tasks such as setting up dev machines and writing automated ETL code to these same machines.
 
-Use it as a boilerplate to start your own apps.
+It is appropriately named after the horror movie of the same name.
 
-Go!
+In its current state it is barely started, but it should remain incomplete for it's entire life. It is not intended as anything other than exploratory proof-of-concept software.
+
+Technology
 ===
 
-Download and run sinatra-bootstrap:
+The UI is built using Bootstrap and Sinatra. The generation programs are written in Ruby. Bootstrap, Ruby, and Sinatra are bran new technologies to the author of Carrie, who is a back-end Java developer. The hacky nature of the code should reflect the relative inexperience of the author.
 
-    git clone git@github.com:pokle/sinatra-bootstrap.git
-    
-    cd sinatra-bootstrap
-    bundle install             # To install sinatra
-    
-    bundle exec ruby app.rb    # To run the sample
-	
-Then open [http://localhost:4567/](http://localhost:4567/)
+Context of Choices by Disabled Options
+====
 
-What's next?
-============
-- Try the rerun gem to restart Sinatra automatically when you change source files: https://github.com/alexch/rerun
+Carrie provides a context for many of it's design decisions by showing disabled choices among those which are enabled.
+
+When selecting options, you are shown not just the one(s) implemented within Carries, but many of the choices that we didn't yet make, by simply disabling the options within a wide set of choices. This gives you a context for understanding your options within the much broaders set of options available. 
+
+Presumably, with enough budget, any choices that are disabled could be enabled. 
+
+Production Code?
+===
+
+If Carrie is a relative hack, and not production code, is the code that it generates also hack level code?
+
+This is an interesting question from a couple different perspectives.
+1. Compared to what? The author has seen so much hack code declared as 'production', it does beg the question. A reasonable attempt is made to follow some standards and be above average. If improvements need to be made - it's all open source!
+2. It's all consistent. Generated code has the advantage of being easier to work with than hand-written code of the same quality level. That's because it's all written the same way.
