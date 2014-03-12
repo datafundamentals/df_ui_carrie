@@ -12,15 +12,27 @@ end
 
 helpers do
   def username
-    session[:identity] ? session[:identity] : 'Hello stranger'
+    session[:identity] ? session[:identity] : 'Please log in and set preferences before using this app'
   end
 end
 
-before '/secure/*' do
-  if !session[:identity] then
-    session[:previous_url] = request.path
-    @error = 'Sorry guacamole, you need to be logged in to visit ' + request.path
-    halt erb(:login_form)
+before '/home' do
+ if !session[:identity] || !session[:workspaceFolder] then
+   session[:previous_url] = request.path
+   @error = 'Please set up first ' + request.path
+   halt erb(:login_form)
+ end
+end
+
+before '/datasource/add' do
+  if !session[:identity] || !session[:workspaceFolder] then
+    redirect to '/login/form'
+  end
+end
+
+before '/opsetup/add' do
+  if !session[:identity] || !session[:workspaceFolder] then
+    redirect to '/login/form'
   end
 end
 
@@ -40,11 +52,9 @@ get '/opsetup/add' do
   erb :add_ops_setup
 end
 
-post '/opsetup/complete' do
-  "Hello World"
-end
 
 post '/datasource/complete' do
+  session[:myDataSource].authorName = session[:identity]
   if !session[:myDataSource] then
     session[:myDataSource] = DataSource.new
   else
@@ -78,16 +88,14 @@ get '/login/form' do
 end
 
 post '/login/attempt' do
-  session[:identity] = params['username']
+  session[:identity] = params['authorName']
+  session[:workspaceFolder] = params['workspaceFolder']
   where_user_came_from = session[:previous_url] || '/'
   redirect to where_user_came_from
 end
 
 get '/logout' do
   session.delete(:identity)
+  session.delete(:workspaceFolder)
   erb "<div class='alert alert-message'>Logged out</div>"
-end
-
-get '/secure/place' do
-  erb "This is a seecrit place that only <%=session[:identity]%> has access to!"
 end

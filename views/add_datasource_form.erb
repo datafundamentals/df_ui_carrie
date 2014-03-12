@@ -1,5 +1,5 @@
 <h1>Add an ETL Datasource</h1>
-<span class="help-block">We shall attempt to collect enough information from you to do most of the work for you, so you are free to concentrate on the exceptions that only humans can do. </span>
+<span class="help-block">Use this page to create a ETL process for a unique data source</span>
 <!-- found this for making some fields conditional https://github.com/OliverJAsh/FormAccordion -->
 
 <br>
@@ -7,9 +7,26 @@
 <br>
 <form role="form" action='/datasource/complete' method='post' class="form-inline well">
 
-	<label class="control-label" for="targetDataTupe">Select Target Data Type</label>
+	<div class="form-group">
+		<span class="help-block">You will select a unique name, and then a parent folder, which will concatenated to provide an input folder for your source data</span>
+		<br>
+		<br>
+		<label for="uniqueName">Unique Datasource Name</label>
+		<span class="help-block">Select a unique one word name for this one datasource only</span>
+		<input type="text" class="form-control" id="uniqueName"  name="uniqueName" placeholder="perfectlyunique">
+	</div>
+	<br>
+	<div class="form-group">
+		<label for="inputParentFolder">Input Parent Folder</label>
+		<span class="help-block">Select a parent folder to be concatenated with the Unique Datasource Name above. The combined folder path will be polled every 60 seconds and the file scooped up, if found. </span>
+		<input type="text" class="form-control" id="inputParentFolder"  name="inputParentFolder" placeholder="/my/parent/folder">
+	</div>
+	<br>
+	<br>
+	<br>
+	<label class="control-label" for="targetDataType">Select Target Data Type</label>
 	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
-	<select class="form-control" id = "targetDataTupe"  name="targetDataTupe">
+	<select class="form-control" id = "targetDataType"  name="targetDataType">
 		<option value="1">Hadoop Hive Table</option>
 		<option value="2" disabled="true">Google Big Table</option>
 		<option value="3" disabled="true">Amazon Dynamo DB</option>
@@ -35,22 +52,6 @@
 	<br>
 	<br>
 	<br>
-	<div class="form-group">
-		<label for="uniqueInputFolder">Unique Input Folder</label>
-		<span class="help-block">Select a folder for this one datasource only, it will be polled every 60 seconds and the file scooped up if found. </span>
-		<input type="text" class="form-control" id="uniqueInputFolder"  name="uniqueInputFolder" placeholder="/my/folder/perfectlyunique">
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" id="isArchived" name="isArchived">
-			Is input file to be archived for re-running later in case of a data loss? </label>
-	</div>
-	<br>
-	<br>
-	<br>
 	<label class="control-label" for="schemaData">Select Schema/Data Combination</label>
 	<span class="help-block">There are many more possible schema/data combinations thans the ones shown below</span>
 	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
@@ -68,24 +69,9 @@
 	<br>
 	<br>
 	<div class="form-group">
-		<label for="authorName">Author</label>
-		<input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Carrie White">
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="form-group">
-		<label for="uniqueInputFolder">Test Data File</label>
+		<label for="exampleInputFile">Test Data File</label>
 		<span class="help-block">Paste in the exact full path to the sample test data file.</span>
-		<input type="text" class="form-control" id="exampleInputFile"  name="exampleInputFile" placeholder="/my/folder/foo_data_20121130">
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" id="hasMd5"  name="hasMd5">
-			Is an md5 of the same filename + ".md5" to be provided with each data file, to be checked against? </label>
+		<input type="text" class="form-control" id="exampleInputFile"  name="exampleInputFile" placeholder="/Users/petecarapetyan/work/etlsource/testdata/testFile1.csv">
 	</div>
 	<br>
 	<br>
@@ -97,16 +83,34 @@
 	</div>
 	<br>
 	<br>
+	<span class="help-block">Please check all answers for completion before submiting. This is not a robust app.
+		<br/>
+		If you have empty fields it will clear every field and make you redo all answeres</span>
+	<button type="submit"  class="btn btn-primary">
+		Submit
+	</button>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<span class="help-block">Everything below is a no-op, and left here only to remind me to enable it later</span>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="hasMd5"  name="hasMd5">
+			Is an md5 of the same filename + ".md5" to be provided with each data file, to be checked against? </label>
+	</div>
 	<div class="checkbox">
 		<label>
 			<input type="checkbox" id="otherPartitions"  name="otherPartitions">
 			Are there other partitions to be extracted and added to this process? </label>
 	</div>
-	<br>
-	<br>
-	<span class="help-block">Please check all answers for completion before submiting. This is not a robust app. If you have empty fields it will clear every field and make you redo all answeres</span> 
-	<button type="submit"  class="btn btn-primary">
-		Primary
-	</button>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="isArchived" name="isArchived">
+			Is input file to be archived for re-running later in case of a data loss? </label>
+	</div>
 </form>

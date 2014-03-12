@@ -1,8 +1,9 @@
 def consumeDatasourceParams (params, datasource)
   datasource.authorName = setStringValue params['authorName'], datasource.authorName
   datasource.dateFieldSource = setStringValue params['dateFieldSource'], datasource.dateFieldSource
-  datasource.targetDataTupe = setStringValue params['targetDataTupe'],  datasource.targetDataTupe
-  datasource.uniqueInputFolder = setStringValue params['uniqueInputFolder'], datasource.uniqueInputFolder
+  datasource.targetDataType = setStringValue params['targetDataType'],  datasource.targetDataType
+  datasource.uniqueName = setStringValue params['uniqueName'], datasource.uniqueName
+  datasource.inputParentFolder = setStringValue params['inputParentFolder'], datasource.inputParentFolder
   datasource.isArchived = setStringValue params['isArchived'],  datasource.isArchived
   datasource.schemaData = setStringValue params['schemaData'],datasource.schemaData
   datasource.exampleInputFile = setStringValue params['exampleInputFile'], datasource.exampleInputFile
@@ -23,13 +24,16 @@ end
 def isCompleteInitialDatasourcePage(datasource)
   ready = true
   if isEmptyNil datasource.authorName then
-  ready = false
+    ready = false
   end
-  if isEmptyNil datasource.uniqueInputFolder then
-  ready = false
+  if isEmptyNil datasource.uniqueName then
+    ready = false
+  end
+  if isEmptyNil datasource.inputParentFolder then
+    ready = false
   end
   if isEmptyNil datasource.exampleInputFile then
-  ready = false
+    ready = false
   end
   ready
 end

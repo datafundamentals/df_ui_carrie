@@ -1,5 +1,23 @@
 <form action='/login/attempt' method='post' class="form-inline well">
-  <input type="text" name='username' placeholder="username" autofocus>
-  <input class="btn primary" type='submit' value='log in'>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="authorName">Proper Name</label>
+		<span class="help-block">Please use something like John Smith or Harry Martin not jsmith or harrym</span>
+		<input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Carrie White">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="workspaceFolder">Workspace Folder</label>
+		<span class="help-block">Paste in the exact full path to workspace where you wish to create your java project</span>
+		<input type="text" class="form-control" id="workspaceFolder"  name="workspaceFolder" placeholder="/home/myusername/work/myworkspace">
+	</div>
+	<br>
+	<br>
+	<br>
+  	<input class="btn-default" type='submit' value='log in' >
+	<br>
 </form>
-<!--http://jaxenter.com/java-ee-7-introduction-to-batch-jsr-352-47400.html-->

@@ -26,20 +26,28 @@ class DataSource
     @dateFieldSource
   end
 
-  def targetDataTupe=(value)
-    @targetDataTupe = value
+  def targetDataType=(value)
+    @targetDataType = value
   end
 
-  def targetDataTupe
-    @targetDataTupe
+  def targetDataType
+    @targetDataType
   end
 
-  def uniqueInputFolder=(value)
-    @uniqueInputFolder = value
+  def uniqueName=(value)
+    @uniqueName = value
   end
 
-  def uniqueInputFolder
-    @uniqueInputFolder
+  def uniqueName
+    @uniqueName
+  end
+
+  def inputParentFolder=(value)
+    @inputParentFolder = value
+  end
+
+  def inputParentFolder
+    @inputParentFolder
   end
 
   def isArchived=(value)
