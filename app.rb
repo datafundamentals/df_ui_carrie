@@ -78,7 +78,7 @@ post '/datasource/complete' do
     erb :schema_data_option_6
   else
     my_generate = Generate.new session[:myDataSource]
-    my_generate.dosomething 
+    my_generate.go 
     erb :detail_something, :locals => {:datasource => session[:myDataSource]}
   end
 end

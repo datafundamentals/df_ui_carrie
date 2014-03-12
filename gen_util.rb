@@ -24,15 +24,19 @@ end
 def isCompleteInitialDatasourcePage(datasource)
   ready = true
   if isEmptyNil datasource.authorName then
+    puts 'author nil'
     ready = false
   end
   if isEmptyNil datasource.uniqueName then
+    puts 'uniqueName nil'
     ready = false
   end
   if isEmptyNil datasource.inputParentFolder then
+    puts 'inputParentFolder nil'
     ready = false
   end
   if isEmptyNil datasource.exampleInputFile then
+    puts 'exampleInputFile nil'
     ready = false
   end
   ready
@@ -163,3 +167,18 @@ def avroSchemaVal (column_head)
     value << column_head.chomp.strip.downcase
     value << "\",\"type\":[\"null\",\"string\"],\"defaultValue\":null},"
 end
+
+
+  
+  def write (writePath, fileName, datasource)
+    if !File.exist?(writePath) then
+      FileUtils.mkdir_p writePath
+    end
+    String filePath = "templates/" << fileName << '.erb'
+    templateMyRouteBuilder = File.read(filePath)
+    templateMyRouteBuilder = Erubis::Eruby.new(templateMyRouteBuilder)
+    String outputFilePath = writePath + '/' + fileName 
+    File.open outputFilePath, 'w' do |f|
+      f.write ( templateMyRouteBuilder.result(:datasource => datasource))
+    end
+  end
