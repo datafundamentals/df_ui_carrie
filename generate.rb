@@ -16,36 +16,36 @@ class Generate
 
   def go
     puts avroSchemaFields(@datasource.pastedColHeads, @datasource.colHeadDelimiter)
-    write(javaPackagePath, "MyRouteBuilder.java", @datasource)
-    write(javaPackagePath, "MainApp.java", @datasource)
-    write(srcMainResourcesPath, "log4j.properties", @datasource)
-    write(projectRootPath, ".classpath", @datasource)
-    write(projectRootPath, ".project", @datasource)
-    write(projectRootPath, "pom.xml", @datasource)
-    write(projectRootPath, "ReadMe.md", @datasource)
-    write(javaTestPackagePath, "AFileInputToAvroTestSupport.java", @datasource)
+    writeFile(javaPackagePath, "MyRouteBuilder.java", @datasource)
+    writeFile(javaPackagePath, "MainApp.java", @datasource)
+    writeFile(srcMainResourcesPath, "log4j.properties", @datasource)
+    writeToFileNamed(projectRootPath, "_.classpath", @datasource, ".classpath")
+    writeToFileNamed(projectRootPath, "_.project", @datasource, ".project")
+    writeFile(projectRootPath, "pom.xml", @datasource)
+    writeFile(projectRootPath, "ReadMe.md", @datasource)
+    writeFile(javaTestPackagePath, "AFileInputToAvroTestSupport.java", @datasource)
     writeTestFile
-    write(haoopShellScriptPath, "create.hive", @datasource)
-    write(haoopShellScriptPath, "runhive.sh", @datasource)
-    write(srcTestResourcesPath, ".gitkeep", @datasource)
+    writeFile(haoopShellScriptPath, "create.hive", @datasource)
+    writeFile(haoopShellScriptPath, "runhive.sh", @datasource)
+    writeFile(srcTestResourcesPath, ".gitkeep", @datasource)
     writeTestFile
   end
 
   def writeTestFile
     if(@datasource.schemaData=='1') then
-      write(javaTestPackagePath, "FileInputToAvroUseCase1Test.java", @datasource)
-      write(srcTestResourcesPath, "testFile1.csv", @datasource)
+      writeFile(javaTestPackagePath, "FileInputToAvroUseCase1Test.java", @datasource)
+      writeFile(srcTestResourcesPath, "testFile1.csv", @datasource)
     elsif(@datasource.schemaData=='2') then
-      write(javaTestPackagePath, "FileInputToAvroUseCase2Test.java", @datasource)
-      write(srcTestResourcesPath, "testFile6.csv", @datasource)
+      writeFile(javaTestPackagePath, "FileInputToAvroUseCase2Test.java", @datasource)
+      writeFile(srcTestResourcesPath, "testFile6.csv", @datasource)
     elsif(@datasource.schemaData=='3') then
-      write(javaTestPackagePath, "FileInputToAvroUseCase3Test.java", @datasource) 
-      write(srcTestResourcesPath, "testFile3.csv", @datasource)
-      write(srcTestResourcesPath, "testFile7.avsc", @datasource)
+      writeFile(javaTestPackagePath, "FileInputToAvroUseCase3Test.java", @datasource) 
+      writeFile(srcTestResourcesPath, "testFile3.csv", @datasource)
+      writeFile(srcTestResourcesPath, "testFile7.avsc", @datasource)
     elsif(@datasource.schemaData=='4') then
-      write(javaTestPackagePath, "FileInputToAvroUseCase4Test.java", @datasource)
-      write(srcTestResourcesPath, "testFile1.csv", @datasource)
-      write(srcTestResourcesPath, "testFile7.avsc", @datasource)
+      writeFile(javaTestPackagePath, "FileInputToAvroUseCase4Test.java", @datasource)
+      writeFile(srcTestResourcesPath, "testFile1.csv", @datasource)
+      writeFile(srcTestResourcesPath, "testFile7.avsc", @datasource)
     else
       puts "something is probably wrong with the selection of the data and schema source types, the result of '" + @datasource.schemaData + "' was not recognized."
     end

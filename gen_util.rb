@@ -174,16 +174,19 @@ def avroSchemaVal (column_head)
 end
 
 
-  
-  def write (writePath, fileName, datasource)
+  def writeToFileNamed(writePath, fromFileName, datasource, toFileName)
     if !File.exist?(writePath) then
       FileUtils.mkdir_p writePath
     end
-    String filePath = "templates/" << fileName << '.erb'
+    String filePath = "templates/" << fromFileName << '.erb'
     templateMyRouteBuilder = File.read(filePath)
     templateMyRouteBuilder = Erubis::Eruby.new(templateMyRouteBuilder)
-    String outputFilePath = writePath + '/' + fileName 
+    String outputFilePath = writePath + '/' + toFileName 
     File.open outputFilePath, 'w' do |f|
       f.write ( templateMyRouteBuilder.result(:datasource => datasource))
-    end
+    end 
+  end
+  
+  def writeFile (writePath, myFileName, datasource)
+    writeToFileNamed(writePath, myFileName, datasource, myFileName)
   end
