@@ -29,20 +29,20 @@ public abstract class AFileInputToAvroTestSupport extends CamelTestSupport {
 
 @Test
 public void testTimerInvokesBeanMethod() throws Exception {
-File resultFile = new File("target/output/testResults.avro");
-if(resultFile.exists()){
-resultFile.delete();
-}
-if(resultFile.exists()){
-fail("Should have deleted file first");
-}
-MockEndpoint mock = getMockEndpoint("mock:result");
-mock.expectedMinimumMessageCount(1);
-assertMockEndpointsSatisfied();
-Thread.sleep(2000);
-if(!resultFile.exists()){
-fail("Did not create expected file " + resultFile.getPath());
-}
+	File resultFile = new File("target/output/testResults.avro");
+	if(resultFile.exists()){
+		resultFile.delete();
+	}
+	if(resultFile.exists()){
+		fail("Should have deleted file first");
+	}
+	MockEndpoint mock = getMockEndpoint("mock:result");
+	mock.expectedMinimumMessageCount(1);
+	assertMockEndpointsSatisfied();
+	Thread.sleep(2000);
+	if(!resultFile.exists()){
+		fail("Did not create expected file " + resultFile.getPath());
+	}
 }
 
 }

@@ -28,10 +28,10 @@ public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
         from("file:src/data/toftp?noop=true")
-        .to("sftp://cloudera@192.168.2.63:/Documents?password=cloudera");
+        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:/Documents?password=<%= datasource.hadoopVmPassword %>");
         from("timer:foo?period=10000")
-        .setBody(constant("./dothis.sh"))
-        .to("ssh://cloudera@192.168.2.63?password=cloudera&useFixedDelay=true&delay=5000")
+        .setBody(constant("./runhive.sh"))
+        .to("ssh://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>?password=<%= datasource.hadoopVmPassword %>&useFixedDelay=true&delay=5000")
         .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
     }
 }

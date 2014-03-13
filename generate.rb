@@ -24,40 +24,61 @@ class Generate
     write(projectRootPath, "pom.xml", @datasource)
     write(projectRootPath, "ReadMe.md", @datasource)
     write(javaTestPackagePath, "AFileInputToAvroTestSupport.java", @datasource)
-    write(javaTestPackagePath, "FileInputToAvroUseCase1Test.java", @datasource)
-    write(javaTestPackagePath, "FileInputToAvroUseCase2Test.java", @datasource)
-    write(javaTestPackagePath, "FileInputToAvroUseCase3Test.java", @datasource)
-    write(javaTestPackagePath, "FileInputToAvroUseCase4Test.java", @datasource)
+    writeTestFile
     write(haoopShellScriptPath, "create.hive", @datasource)
     write(haoopShellScriptPath, "runhive.sh", @datasource)
+    write(srcTestResourcesPath, ".gitkeep", @datasource)
+    writeTestFile
   end
-  
-  
-  def javaPackagePath 
+
+  def writeTestFile
+    if(@datasource.schemaData=='1') then
+      write(javaTestPackagePath, "FileInputToAvroUseCase1Test.java", @datasource)
+      write(srcTestResourcesPath, "testFile1.csv", @datasource)
+    elsif(@datasource.schemaData=='2') then
+      write(javaTestPackagePath, "FileInputToAvroUseCase2Test.java", @datasource)
+      write(srcTestResourcesPath, "testFile6.csv", @datasource)
+    elsif(@datasource.schemaData=='3') then
+      write(javaTestPackagePath, "FileInputToAvroUseCase3Test.java", @datasource) 
+      write(srcTestResourcesPath, "testFile3.csv", @datasource)
+      write(srcTestResourcesPath, "testFile7.avsc", @datasource)
+    elsif(@datasource.schemaData=='4') then
+      write(javaTestPackagePath, "FileInputToAvroUseCase4Test.java", @datasource)
+      write(srcTestResourcesPath, "testFile1.csv", @datasource)
+      write(srcTestResourcesPath, "testFile7.avsc", @datasource)
+    else
+      puts "something is probably wrong with the selection of the data and schema source types, the result of '" + @datasource.schemaData + "' was not recognized."
+    end
+  end
+
+  def javaPackagePath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/xprmnt'
+    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
   end
-  
-  def javaTestPackagePath 
+
+  def javaTestPackagePath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/xprmnt'
+    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/refactorme'
   end
-  
-  def srcMainResourcesPath 
+
+  def srcMainResourcesPath
     # need to add a cleanup so doesn't add / where there already is one
     String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/main/resources'
   end
-  
-  def projectRootPath 
+
+  def srcTestResourcesPath
+    # need to add a cleanup so doesn't add / where there already is one
+    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/test/resources'
+  end
+
+  def projectRootPath
     # need to add a cleanup so doesn't add / where there already is one
     String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName
   end
-  
-  def haoopShellScriptPath 
+
+  def haoopShellScriptPath
     # need to add a cleanup so doesn't add / where there already is one
     String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/dunnoWhereThisGoes'
   end
-  
-  
-  
+
 end

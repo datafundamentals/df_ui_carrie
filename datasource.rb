@@ -1,6 +1,15 @@
 require 'date'
 
 class DataSource
+
+  def copyMe=(value)
+    @copyMe = value
+  end
+
+  def copyMe
+    @copyMe
+  end
+  
   def date
     '20'+Time.now().strftime("%y.%m.%d")
   end
@@ -129,6 +138,7 @@ class DataSource
   end
 
   def hdfsDir
+    # hdfs://sandbox.hortonworks.com:8020/user/sandbox/
     @hdfsDir
   end
 
@@ -221,12 +231,38 @@ class DataSource
   end
   
 
-  def hadoopVmRootPassword=(value)
-    @hadoopVmRootPassword = value
+  def hadoopVmPassword=(value)
+    @hadoopVmPassword = value
   end
 
-  def hadoopVmRootPassword
-    @hadoopVmRootPassword
+  def hadoopVmPassword
+    @hadoopVmPassword
+  end
+  
+
+  def hadoopVmUserName=(value)
+    @hadoopVmUserName = value
+  end
+
+  def hadoopVmUserName
+    @hadoopVmUserName
+  end
+
+  def hiveDb=(value)
+    @hiveDb = value
+  end
+
+  def hiveDb
+    @hiveDb
+  end
+
+
+  def partitionDdl=(value)
+    @partitionDdl = value
+  end
+
+  def partitionDdl
+    @partitionDdl
   end
   
 end

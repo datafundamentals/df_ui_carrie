@@ -11,13 +11,15 @@ def consumeDatasourceParams (params, datasource)
   datasource.otherPartitions = setStringValue params['otherPartitions'], datasource.otherPartitions
   datasource.recordValidation = setStringValue params['recordValidation'], datasource.recordValidation
   datasource.tableName = setStringValue params['tableName'], datasource.tableName
+  datasource.hiveDb = setStringValue params['hiveDb'], datasource.hiveDb
   datasource.hdfsDir = setStringValue params['hdfsDir'], datasource.hdfsDir
   datasource.pastedColHeads = setStringValue params['pastedColHeads'], datasource.pastedColHeads
   datasource.colHeadDelimiter = setStringValue params['colHeadDelimiter'], datasource.colHeadDelimiter
   datasource.dataDelimiter = setStringValue params['dataDelimiter'], datasource.dataDelimiter
   datasource.colHeadFileName = setStringValue params['colHeadFileName'], datasource.colHeadFileName
   datasource.dataInputFileName = setStringValue params['dataInputFileName'], datasource.dataInputFileName
-  datasource.hadoopVmRootPassword = setStringValue params['hadoopVmRootPassword'], datasource.hadoopVmRootPassword
+  datasource.hadoopVmPassword = setStringValue params['hadoopVmPassword'], datasource.hadoopVmPassword
+  datasource.hadoopVmUserName = setStringValue params['hadoopVmUserName'], datasource.hadoopVmUserName
   datasource.hadoopVmSshIpAddress = setStringValue params['hadoopVmSshIpAddress'], datasource.hadoopVmSshIpAddress
 end
 
@@ -47,10 +49,13 @@ def isCompleteForHadoop(datasource)
   if isEmptyNil datasource.tableName then
   ready = false
   end
-  if isEmptyNil datasource.hdfsDir then
+  if isEmptyNil datasource.hiveDb then
   ready = false
   end
-  if isEmptyNil datasource.hadoopVmRootPassword then
+  if isEmptyNil datasource.hadoopVmPassword then
+  ready = false
+  end
+  if isEmptyNil datasource.hadoopVmUserName then
   ready = false
   end
   if isEmptyNil datasource.hadoopVmSshIpAddress then

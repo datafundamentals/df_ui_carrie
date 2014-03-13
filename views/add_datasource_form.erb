@@ -57,13 +57,16 @@
 	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
 	<span class="help-block">If yours is not mentioned below, you would have to hand convert it to one of these below to use current automation</span>
 	<select class="form-control" id = "schemaData" name="schemaData">
-		<option value="1">Pasted column headers for schema, delimited flat file for data</option>
-		<option value="2">Delimited flat file always includes column headers as first row</option>
-		<option value="3">Delimited column headers file delivered every time, with delimited flat file for data, each named separately</option>
-		<option value="4">Delimited column headers file selected with this UI, with delimited flat file for data, each named separately</option>
-		<option value="5">One time avro schema selected with this UI, delimited flat file for data</option>
-		<option value="6">One time avro schema selected with this UI, json data file for data</option>
-		<option value="7" disabled="true">Xml schema selected with this UI, xml data file for data</option>
+		<option value="1">Delimited flat file always includes column headers as first row</option>
+		<option value="2">Delimited flat file always includes avro schema as first row</option>
+		<option value="3">Delimited flat file with separate avro schema file uploaded here</option>
+		<option value="4">Delimited flat file always includes column headers as first row, with separate avro schema file uploaded once here, to validate against</option>
+		<option value="5" disabled="true">Delimited column headers file delivered every time, with delimited flat file for data, each named separately</option>
+		<option value="6" disabled="true">Delimited column headers file selected with this UI, with delimited flat file for data, each named separately</option>
+		<option value="7" disabled="true">One time avro schema selected with this UI, delimited flat file for data</option>
+		<option value="8" disabled="true">One time avro schema selected with this UI, json data file for data</option>
+		<option value="9" disabled="true">Xml schema selected with this UI, xml data file for data</option>
+		<option value="0" disabled="true">Pasted column headers for schema, delimited flat file for data</option>
 	</select>
 	<br>
 	<br>
