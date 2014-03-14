@@ -27,7 +27,6 @@ class Generate
     writeTestFile
     writeFile(haoopShellScriptPath, "create.hive", @datasource)
     writeFile(haoopShellScriptPath, "runhive.sh", @datasource)
-    writeFile(srcTestResourcesPath, ".gitkeep", @datasource)
     writeTestFile
   end
 
@@ -53,32 +52,32 @@ class Generate
 
   def javaPackagePath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
   end
 
   def javaTestPackagePath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/refactorme'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/refactorme'
   end
 
   def srcMainResourcesPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/main/resources'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/resources'
   end
 
   def srcTestResourcesPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/src/test/resources'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/resources'
   end
 
   def projectRootPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName
   end
 
   def haoopShellScriptPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.inputParentFolder << '/' << @datasource.uniqueName << '/dunnoWhereThisGoes'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/dunnoWhereThisGoes'
   end
 
 end

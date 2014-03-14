@@ -3,7 +3,8 @@ def consumeDatasourceParams (params, datasource)
   datasource.dateFieldSource = setStringValue params['dateFieldSource'], datasource.dateFieldSource
   datasource.targetDataType = setStringValue params['targetDataType'],  datasource.targetDataType
   datasource.uniqueName = setStringValue params['uniqueName'], datasource.uniqueName
-  datasource.inputParentFolder = setStringValue params['inputParentFolder'], datasource.inputParentFolder
+  datasource.workspaceFolder = setStringValue params['workspaceFolder'], datasource.workspaceFolder
+  datasource.etlDropFolder = setStringValue params['etlDropFolder'], datasource.etlDropFolder
   datasource.isArchived = setStringValue params['isArchived'],  datasource.isArchived
   datasource.schemaData = setStringValue params['schemaData'],datasource.schemaData
   datasource.exampleInputFile = setStringValue params['exampleInputFile'], datasource.exampleInputFile
@@ -21,6 +22,7 @@ def consumeDatasourceParams (params, datasource)
   datasource.hadoopVmPassword = setStringValue params['hadoopVmPassword'], datasource.hadoopVmPassword
   datasource.hadoopVmUserName = setStringValue params['hadoopVmUserName'], datasource.hadoopVmUserName
   datasource.hadoopVmSshIpAddress = setStringValue params['hadoopVmSshIpAddress'], datasource.hadoopVmSshIpAddress
+  datasource.ftpTargetDir = setStringValue params['ftpTargetDir'], datasource.ftpTargetDir
 end
 
 def isCompleteInitialDatasourcePage(datasource)
@@ -33,8 +35,12 @@ def isCompleteInitialDatasourcePage(datasource)
     puts 'uniqueName nil'
     ready = false
   end
-  if isEmptyNil datasource.inputParentFolder then
-    puts 'inputParentFolder nil'
+  if isEmptyNil datasource.workspaceFolder then
+    puts 'workspaceFolder nil'
+    ready = false
+  end
+  if isEmptyNil datasource.etlDropFolder then
+    puts 'etlDropFolder nil'
     ready = false
   end
   if isEmptyNil datasource.exampleInputFile then
@@ -47,6 +53,12 @@ end
 def isCompleteForHadoop(datasource)
   ready = true
   if isEmptyNil datasource.tableName then
+  ready = false
+  end
+  if isEmptyNil datasource.hdfsDir then
+  ready = false
+  end
+  if isEmptyNil datasource.ftpTargetDir then
   ready = false
   end
   if isEmptyNil datasource.hiveDb then

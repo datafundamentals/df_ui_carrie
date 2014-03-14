@@ -51,12 +51,20 @@ class DataSource
     @uniqueName
   end
 
-  def inputParentFolder=(value)
-    @inputParentFolder = value
+  def workspaceFolder=(value)
+    @workspaceFolder = value
   end
 
-  def inputParentFolder
-    @inputParentFolder
+  def workspaceFolder
+    @workspaceFolder
+  end
+
+  def etlDropFolder=(value)
+    @etlDropFolder = value
+  end
+
+  def etlDropFolder
+    @etlDropFolder
   end
 
   def isArchived=(value)
@@ -263,6 +271,13 @@ class DataSource
 
   def partitionDdl
     @partitionDdl
+  end
+  def ftpTargetDir=(value)
+    @ftpTargetDir = value
+  end
+
+  def ftpTargetDir
+    @ftpTargetDir
   end
   
 end
