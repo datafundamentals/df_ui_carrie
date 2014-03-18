@@ -280,4 +280,20 @@ class DataSource
     @ftpTargetDir
   end
   
+
+  def className=(value)
+    @className = value
+  end
+
+  def className
+    @className
+  end
+
+  def packageName=(value)
+    @packageName = value
+  end
+
+  def packageName
+    @packageName
+  end
 end

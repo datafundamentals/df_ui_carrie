@@ -23,6 +23,8 @@ def consumeDatasourceParams (params, datasource)
   datasource.hadoopVmUserName = setStringValue params['hadoopVmUserName'], datasource.hadoopVmUserName
   datasource.hadoopVmSshIpAddress = setStringValue params['hadoopVmSshIpAddress'], datasource.hadoopVmSshIpAddress
   datasource.ftpTargetDir = setStringValue params['ftpTargetDir'], datasource.ftpTargetDir
+  datasource.className = setStringValue params['className'], datasource.className
+  datasource.packageName = setStringValue params['packageName'], datasource.packageName
 end
 
 def isCompleteInitialDatasourcePage(datasource)

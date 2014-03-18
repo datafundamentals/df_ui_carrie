@@ -25,8 +25,8 @@ class Generate
     writeFile(projectRootPath, "ReadMe.md", @datasource)
     writeFile(javaTestPackagePath, "AFileInputToAvroTestSupport.java", @datasource)
     writeTestFile
-    writeFile(haoopShellScriptPath, "create.hive", @datasource)
-    writeFile(haoopShellScriptPath, "runhive.sh", @datasource)
+    writeFile(haoopShellScriptPath, "run.hive", @datasource)
+    writeFile(haoopShellScriptPath, "run.sh", @datasource)
     writeTestFile
   end
 
@@ -77,7 +77,7 @@ class Generate
 
   def haoopShellScriptPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/dunnoWhereThisGoes'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/tmp'
   end
 
 end
