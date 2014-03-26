@@ -27,6 +27,7 @@ class Generate
     writeTestFile
     writeFile(haoopShellScriptPath, "run.hive", @datasource)
     writeFile(haoopShellScriptPath, "run.sh", @datasource)
+    writeFile(haoopShellScriptPath, "main.sh", @datasource)
     writeTestFile
   end
 
@@ -77,7 +78,7 @@ class Generate
 
   def haoopShellScriptPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/tmp'
+    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/bin'
   end
 
 end

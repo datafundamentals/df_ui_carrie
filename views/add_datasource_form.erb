@@ -67,10 +67,9 @@
 	<span class="help-block">Data is typically date partitioned when, or a date field is added, in big data use cases</span>
 	<span class="help-block"><small>[Diasbled options may be added as market demands]</small></span>
 	<select class="form-control" name = "dateFieldSource">
-		<option value="1">None, not enough data expected to require date partition</option>
-		<option value="2">Use yyyymmdd found in the file name</option>
-		<option value="3">Use current date</option>
-		<option value="3">Use date from a field named below</option>
+		<option value="1">Use current date</option>
+		<option value="2" disabled="true">Use yyyymmdd found in the file name</option>
+		<option value="3" disabled="true">Use date from a named field</option>
 		<option value="4" disabled="true">Use current year plus mmdd found in file name</option>
 		<option value="5" disabled="true">Use yesterday's date</option>
 		<option value="6" disabled="true">Other [specify below]</option>
@@ -94,6 +93,7 @@
 		<option value="9" disabled="true">Xml schema selected with this UI, xml data file for data</option>
 		<option value="0" disabled="true">Pasted column headers for schema, delimited flat file for data</option>
 	</select>
+	<!--
 	<br>
 	<br>
 	<br>
@@ -102,6 +102,7 @@
 		<span class="help-block">Paste in the exact full path to the sample test data file.</span>
 		<input type="text" class="form-control" id="exampleInputFile"  name="exampleInputFile" placeholder="/Users/petecarapetyan/work/etlsource/testdata/testFile1.csv">
 	</div>
+	-->
 	<br>
 	<br>
 	<br>

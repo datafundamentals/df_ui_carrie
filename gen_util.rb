@@ -7,7 +7,7 @@ def consumeDatasourceParams (params, datasource)
   datasource.etlDropFolder = setStringValue params['etlDropFolder'], datasource.etlDropFolder
   datasource.isArchived = setStringValue params['isArchived'],  datasource.isArchived
   datasource.schemaData = setStringValue params['schemaData'],datasource.schemaData
-  datasource.exampleInputFile = setStringValue params['exampleInputFile'], datasource.exampleInputFile
+  # datasource.exampleInputFile = setStringValue params['exampleInputFile'], datasource.exampleInputFile
   datasource.hasMd5 = setStringValue params['hasMd5'], datasource.hasMd5
   datasource.otherPartitions = setStringValue params['otherPartitions'], datasource.otherPartitions
   datasource.recordValidation = setStringValue params['recordValidation'], datasource.recordValidation
@@ -45,10 +45,10 @@ def isCompleteInitialDatasourcePage(datasource)
     puts 'etlDropFolder nil'
     ready = false
   end
-  if isEmptyNil datasource.exampleInputFile then
-    puts 'exampleInputFile nil'
-    ready = false
-  end
+  # if isEmptyNil datasource.exampleInputFile then
+    # puts 'exampleInputFile nil'
+    # ready = false
+  # end
   ready
 end
 
