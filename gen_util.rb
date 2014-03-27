@@ -1,9 +1,12 @@
 def consumeDatasourceParams (params, datasource)
   datasource.authorName = setStringValue params['authorName'], datasource.authorName
+  datasource.workspaceFolder = setStringValue params['workspaceFolder'], datasource.workspaceFolder
+  datasource.deployIpAddress = setStringValue params['deployIpAddress'], datasource.deployIpAddress
+  datasource.serverHome = setStringValue params['serverHome'], datasource.serverHome
+  datasource.devHome = setStringValue params['devHome'], datasource.devHome
   datasource.dateFieldSource = setStringValue params['dateFieldSource'], datasource.dateFieldSource
   datasource.targetDataType = setStringValue params['targetDataType'],  datasource.targetDataType
   datasource.uniqueName = setStringValue params['uniqueName'], datasource.uniqueName
-  datasource.workspaceFolder = setStringValue params['workspaceFolder'], datasource.workspaceFolder
   datasource.etlDropFolder = setStringValue params['etlDropFolder'], datasource.etlDropFolder
   datasource.isArchived = setStringValue params['isArchived'],  datasource.isArchived
   datasource.schemaData = setStringValue params['schemaData'],datasource.schemaData
@@ -25,6 +28,7 @@ def consumeDatasourceParams (params, datasource)
   datasource.ftpTargetDir = setStringValue params['ftpTargetDir'], datasource.ftpTargetDir
   datasource.className = setStringValue params['className'], datasource.className
   datasource.packageName = setStringValue params['packageName'], datasource.packageName
+  
 end
 
 def isCompleteInitialDatasourcePage(datasource)
@@ -35,10 +39,6 @@ def isCompleteInitialDatasourcePage(datasource)
   end
   if isEmptyNil datasource.uniqueName then
     puts 'uniqueName nil'
-    ready = false
-  end
-  if isEmptyNil datasource.workspaceFolder then
-    puts 'workspaceFolder nil'
     ready = false
   end
   if isEmptyNil datasource.etlDropFolder then

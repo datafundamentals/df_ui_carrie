@@ -296,4 +296,28 @@ class DataSource
   def packageName
     @packageName
   end
+
+  def deployIpAddress=(value)
+    @deployIpAddress = value
+  end
+
+  def deployIpAddress
+    @deployIpAddress
+  end
+
+  def serverHome=(value)
+    @serverHome = value
+  end
+
+  def serverHome
+    @serverHome
+  end
+
+  def devHome=(value)
+    @devHome = value
+  end
+
+  def devHome
+    @devHome
+  end
 end

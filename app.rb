@@ -8,6 +8,7 @@ require 'sinatra'
 
 configure do
   enable :sessions
+  # set :port, 8080
 end
 
 helpers do
@@ -17,7 +18,7 @@ helpers do
 end
 
 before '/home' do
- if !session[:identity] || !session[:workspaceFolder] then
+ if !session[:identity] || !session[:myDataSource].workspaceFolder|| !session[:myDataSource].deployIpAddress|| !session[:myDataSource].serverHome|| !session[:myDataSource].devHome then
    session[:previous_url] = request.path
    @error = 'Please set up first ' + request.path
    halt erb(:login_form)
@@ -25,13 +26,13 @@ before '/home' do
 end
 
 before '/datasource/add' do
-  if !session[:identity] || !session[:workspaceFolder] then
+ if !session[:identity] || !session[:myDataSource].workspaceFolder|| !session[:myDataSource].deployIpAddress|| !session[:myDataSource].serverHome|| !session[:myDataSource].devHome then
     redirect to '/login/form'
   end
 end
 
 before '/opsetup/add' do
-  if !session[:identity] || !session[:workspaceFolder] then
+ if !session[:identity] || !session[:myDataSource].workspaceFolder|| !session[:myDataSource].deployIpAddress|| !session[:myDataSource].serverHome|| !session[:myDataSource].devHome then
     redirect to '/login/form'
   end
 end
@@ -41,7 +42,6 @@ get '/' do
 end
 
 get '/datasource/add' do
-  session[:myDataSource] = DataSource.new
   params.clear
   erb :add_datasource_form
 end
@@ -88,8 +88,12 @@ get '/login/form' do
 end
 
 post '/login/attempt' do
+  session[:myDataSource] = DataSource.new
   session[:identity] = params['authorName']
-  session[:workspaceFolder] = params['workspaceFolder']
+  session[:myDataSource].workspaceFolder = params['workspaceFolder']
+  session[:myDataSource].deployIpAddress = params['deployIpAddress']
+  session[:myDataSource].serverHome = params['serverHome']
+  session[:myDataSource].devHome = params['devHome']
   where_user_came_from = session[:previous_url] || '/'
   redirect to where_user_came_from
 end

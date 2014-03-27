@@ -19,7 +19,7 @@ YYYY_MM_DD=TODAY=$(date +%Y-%m-%d)
 create database if not exists <%= datasource.hiveDb %>;
 
 use <%= datasource.hiveDb %>;
-
+ 
 # DROP TABLE IF EXISTS `<%= datasource.hiveDb %>`.<%= datasource.tableName %>;
 
 CREATE EXTERNAL TABLE IF NOT EXISTS <%= datasource.tableName %>

@@ -28,6 +28,8 @@ class Generate
     writeFile(haoopShellScriptPath, "run.hive", @datasource)
     writeFile(haoopShellScriptPath, "run.sh", @datasource)
     writeFile(haoopShellScriptPath, "main.sh", @datasource)
+    writeFile(haoopShellScriptPath, "deployToServer.sh", @datasource)
+    writeFile(haoopShellScriptPath, "deployLocal.sh", @datasource)
     writeTestFile
   end
 
@@ -52,7 +54,7 @@ class Generate
   end
 
   def javaPackagePath
-    # need to add a cleanup so doesn't add / where there already is one
+    # need to add a cleanup so doesn't add / where there already is one 
     String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
   end
 

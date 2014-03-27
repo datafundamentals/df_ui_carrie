@@ -5,7 +5,7 @@
 	<div class="form-group">
 		<label for="authorName">Proper Name</label>
 		<span class="help-block">Please use something like John Smith or Harry Martin not jsmith or harrym</span>
-		<input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Carrie White">
+		<input type="text" class="form-control" id="authorName"  name="authorName" value="Carrie White">
 	</div>
 	<br>
 	<br>
@@ -13,11 +13,36 @@
 	<div class="form-group">
 		<label for="workspaceFolder">Workspace Folder</label>
 		<span class="help-block">Paste in the exact full path to workspace where you wish to create your java project</span>
-		<input type="text" class="form-control" id="workspaceFolder"  name="workspaceFolder" placeholder="/home/myusername/work/myworkspace">
+		<input type="text" class="form-control" id="workspaceFolder"  name="workspaceFolder" placeholder="work/myworkspace">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="deployIpAddress">Deployment IP Address</label>
+		<span class="help-block">Development server IP address</span>
+		<input type="text" class="form-control" id="deployIpAddress"  name="deployIpAddress" placeholder="192.168.33.44">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="serverHome">User home on server deployed to</label>
+		<span class="help-block">User directory on the deployment server</span>
+		<input type="text" class="form-control" id="serverHome"  name="serverHome" value="/home/vagrant">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="devHome">User home on dev box</label>
+		<span class="help-block">User directory on the the dev box - (probably this machine)</span>
+		<input type="text" class="form-control" id="devHome"  name="devHome" placeholder="/Users/petecarapetyan">
 	</div>
 	<br>
 	<br>
 	<br>
   	<input class="btn-default" type='submit' value='Log in, Set Preferences' >
 	<br>
+	
 </form>

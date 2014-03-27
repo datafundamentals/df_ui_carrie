@@ -29,22 +29,22 @@ public class MyRouteBuilder extends RouteBuilder {
     public void configure() {
 
 // copy any data files which appear in the ETL drop folder to processing folder to run toAvro
-        from("file:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
+        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
         .log("copied file for avro transformation: ${in.header.CamelFileName}")
-		.to("file:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform");
+		.to("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform");
 
 // run toAvro and create new avro files
-        from("file:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform?include=.*.csv")
+        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform?include=.*.csv")
         .log("toAvro transformation: ${in.header.CamelFileName}")
-		.to("avroetl:abar?outputFilePath=<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform/<%= datasource.tableName %>&delimiter=,&exceptionOnBadData=false&className=<%= datasource.className %>&namespace=<%= datasource.packageName %>");
+		.to("avroetl:abar?outputFilePath=<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform/<%= datasource.tableName %>&delimiter=,&exceptionOnBadData=false&className=<%= datasource.className %>&namespace=<%= datasource.packageName %>");
 		
 //now, move newly created avro files back to ETL drop folder
-//        from("file:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform")
+//        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform")
 //        .log("moved file after avro transformation: ${in.header.CamelFileName}")
 //        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:2222/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");	
 
 //copy all files to the hadoop server input folder
-//        from("file:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
+//        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
 //        .log("copied all files to server: ${in.header.CamelFileName}")
 //        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");	
         
