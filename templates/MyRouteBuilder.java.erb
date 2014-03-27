@@ -27,7 +27,7 @@ import org.apache.camel.builder.RouteBuilder;
 public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
-
+//
 // copy any data files which appear in the ETL drop folder to processing folder to run toAvro
         from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
         .log("copied file for avro transformation: ${in.header.CamelFileName}")

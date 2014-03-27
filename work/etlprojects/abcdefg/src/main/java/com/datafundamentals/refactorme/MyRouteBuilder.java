@@ -27,35 +27,35 @@ import org.apache.camel.builder.RouteBuilder;
 public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
-
+//
 // copy any data files which appear in the ETL drop folder to processing folder to run toAvro
-        from("file:work/etldrop/abcdefg?noop=true")
+        from("file:/home/vagrant/work/etldrop/abcdefg?noop=true")
         .log("copied file for avro transformation: ${in.header.CamelFileName}")
-		.to("file:work/etldrop/abcdefg/transform");
+		.to("file:/home/vagrant/work/etldrop/abcdefg/transform");
 
 // run toAvro and create new avro files
-        from("file:work/etldrop/abcdefg/transform?include=.*.csv")
+        from("file:/home/vagrant/work/etldrop/abcdefg/transform?include=.*.csv")
         .log("toAvro transformation: ${in.header.CamelFileName}")
-		.to("avroetl:abar?outputFilePath=work/etldrop/abcdefg/transform/test1&delimiter=,&exceptionOnBadData=false&className=BarFoo&namespace=org.foo.bar");
+		.to("avroetl:abar?outputFilePath=/home/vagrant/work/etldrop/abcdefg/transform/test1&delimiter=,&exceptionOnBadData=false&className=FooBar&namespace=org.foo.bar");
 		
 //now, move newly created avro files back to ETL drop folder
-//        from("file:work/etldrop/abcdefg/transform")
+//        from("file:/home/vagrant/work/etldrop/abcdefg/transform")
 //        .log("moved file after avro transformation: ${in.header.CamelFileName}")
-//        .to("sftp://root@127.0.0.1:2222//my/dir/abcdefg?password=hadoop");	
+//        .to("sftp://root@127.0.0.1:2222//my/dir/abcdefg?password=cloudera for cloudera, hadoop for hortonworks");	
 
 //copy all files to the hadoop server input folder
-//        from("file:work/etldrop/abcdefg?noop=true")
+//        from("file:/home/vagrant/work/etldrop/abcdefg?noop=true")
 //        .log("copied all files to server: ${in.header.CamelFileName}")
-//        .to("sftp://root@127.0.0.1://my/dir/abcdefg?password=hadoop");	
+//        .to("sftp://root@127.0.0.1://my/dir/abcdefg?password=cloudera for cloudera, hadoop for hortonworks");	
         
 // move the program files too - these should only move first time, after that this should not have any effect
 //        from("file:bin?noop=true")
-//        .to("sftp://root@127.0.0.1://my/dir/abcdefg?password=hadoop");
+//        .to("sftp://root@127.0.0.1://my/dir/abcdefg?password=cloudera for cloudera, hadoop for hortonworks");
         
 // run hive commands to inject data from the hadoop vm into the hive tables
 //        from("timer:foo?period=10000")
 //        .setBody(constant("./runhive.sh"))
-//        .to("ssh://root@127.0.0.1?password=hadoop&useFixedDelay=true&delay=5000")
+//        .to("ssh://root@127.0.0.1?password=cloudera for cloudera, hadoop for hortonworks&useFixedDelay=true&delay=5000")
 //        .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
     }
 }

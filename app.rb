@@ -100,6 +100,6 @@ end
 
 get '/logout' do
   session.delete(:identity)
-  session.delete(:workspaceFolder)
+  session.delete(:myDataSource)
   erb "<div class='alert alert-message'>Logged out</div>"
 end

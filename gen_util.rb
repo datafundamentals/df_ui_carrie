@@ -189,6 +189,7 @@ end
 
 
   def writeToFileNamed(writePath, fromFileName, datasource, toFileName)
+    # puts 'NEED THIS ' + writePath
     if !File.exist?(writePath) then
       FileUtils.mkdir_p writePath
     end

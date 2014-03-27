@@ -30,6 +30,7 @@ class Generate
     writeFile(haoopShellScriptPath, "main.sh", @datasource)
     writeFile(haoopShellScriptPath, "deployToServer.sh", @datasource)
     writeFile(haoopShellScriptPath, "deployLocal.sh", @datasource)
+    writeFile(haoopShellScriptPath, "dev2etlDrop.sh", @datasource)
     writeTestFile
   end
 
@@ -55,32 +56,32 @@ class Generate
 
   def javaPackagePath
     # need to add a cleanup so doesn't add / where there already is one 
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/java/com/datafundamentals/refactorme'
   end
 
   def javaTestPackagePath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/refactorme'
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/java/com/datafundamentals/refactorme'
   end
 
   def srcMainResourcesPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/resources'
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/main/resources'
   end
 
   def srcTestResourcesPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/resources'
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName << '/src/test/resources'
   end
 
   def projectRootPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName
   end
 
   def haoopShellScriptPath
     # need to add a cleanup so doesn't add / where there already is one
-    String path = ''+ @datasource.workspaceFolder << '/' << @datasource.uniqueName << '/bin'
+    String path = ''+ @datasource.devHome << '/' <<@datasource.workspaceFolder << '/' << @datasource.uniqueName << '/bin'
   end
 
 end
