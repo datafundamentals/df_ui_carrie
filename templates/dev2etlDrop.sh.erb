@@ -1,1 +1,1 @@
-scp -r $1 vagrant@<%= datasource.deployIpAddress %>:<%= datasource.etlDropFolder %>
+scp -r $1 vagrant@<%= datasource.deployIpAddress %>:<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>

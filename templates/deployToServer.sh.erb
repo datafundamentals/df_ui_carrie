@@ -1,1 +1,2 @@
 scp -r <%= datasource.devHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %> vagrant@<%= datasource.deployIpAddress %>:<%= datasource.serverHome %>
+scp -r <%= datasource.devHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/setup.sh vagrant@<%= datasource.deployIpAddress %>:<%= datasource.serverHome %>

@@ -27,7 +27,12 @@ import org.apache.camel.builder.RouteBuilder;
 public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
-//
+// ssh in to set known_hosts file, seems to be required for sftp to work later
+      from("timer:foo?period=10000")
+      .setBody(constant("echo 'hi'"))
+      .to("ssh://cloudera@192.168.2.63?password=cloudera&useFixedDelay=true&delay=1")
+      .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
+      
 // copy any data files which appear in the ETL drop folder to processing folder to run toAvro
         from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
         .log("copied file for avro transformation: ${in.header.CamelFileName}")
@@ -39,9 +44,10 @@ public class MyRouteBuilder extends RouteBuilder {
 		.to("avroetl:abar?outputFilePath=<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform/<%= datasource.tableName %>&delimiter=,&exceptionOnBadData=false&className=<%= datasource.className %>&namespace=<%= datasource.packageName %>");
 		
 //now, move newly created avro files back to ETL drop folder
-//        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform")
-//        .log("moved file after avro transformation: ${in.header.CamelFileName}")
-//        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:2222/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");	
+        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform")
+        .log("moved file after avro transformation: ${in.header.CamelFileName}")
+        //.to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:2222/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");
+       .to("sftp://<%= datasource.hadoopVmSshIpAddress %>:<%= datasource.sshPort %>/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>&username=<%= datasource.hadoopVmUserName %>&knownHostsFile=<%= datasource.serverHome %>/.ssh/known_hosts");	
 
 //copy all files to the hadoop server input folder
 //        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")

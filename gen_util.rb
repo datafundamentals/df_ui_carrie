@@ -28,6 +28,7 @@ def consumeDatasourceParams (params, datasource)
   datasource.ftpTargetDir = setStringValue params['ftpTargetDir'], datasource.ftpTargetDir
   datasource.className = setStringValue params['className'], datasource.className
   datasource.packageName = setStringValue params['packageName'], datasource.packageName
+  datasource.sshPort = setStringValue params['sshPort'], datasource.sshPort
   
 end
 
@@ -75,6 +76,9 @@ def isCompleteForHadoop(datasource)
   if isEmptyNil datasource.hadoopVmSshIpAddress then
   ready = false
   end
+  # if sshPort datasource.sshPort then
+  # ready = false
+  # end
   ready
 end
 

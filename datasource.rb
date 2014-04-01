@@ -320,4 +320,12 @@ class DataSource
   def devHome
     @devHome
   end
+
+  def sshPort=(value)
+    @sshPort = value
+  end
+
+  def sshPort
+    @sshPort
+  end
 end
