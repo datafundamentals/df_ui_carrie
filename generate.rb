@@ -32,6 +32,7 @@ class Generate
     writeFile(haoopShellScriptPath, "deployLocal.sh", @datasource)
     writeFile(haoopShellScriptPath, "dev2etlDrop.sh", @datasource)
     writeFile(haoopShellScriptPath, "setup.sh", @datasource)
+    writeFile(haoopShellScriptPath, "clearAll.sh", @datasource)
     writeTestFile
   end
 

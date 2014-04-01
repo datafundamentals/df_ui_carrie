@@ -27,9 +27,9 @@ import org.apache.camel.builder.RouteBuilder;
 public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
-// ssh in to set known_hosts file, seems to be required for sftp to work later
-      from("timer:foo?period=10000")
-      .setBody(constant("echo 'hi'"))
+// set the ftp target directory, also first use of ssh to set known_hosts file, seems to be required for sftp to work later
+      from("timer:foo?repeatCount=1")
+      .setBody(constant("mkdir -p <%= datasource.ftpTargetDir %>"))
       .to("ssh://cloudera@192.168.2.63?password=cloudera&useFixedDelay=true&delay=1")
       .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
       

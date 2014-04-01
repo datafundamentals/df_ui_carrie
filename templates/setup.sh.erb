@@ -24,4 +24,6 @@ sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDro
 sudo chown vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>
 sudo mv <%= datasource.serverHome %>/<%= datasource.uniqueName %> <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>
 sudo rm <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/setup.sh
+sudo mv <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/clearAll.sh <%= datasource.serverHome %>
+sudo rm <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/clearAll.sh
 source  <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/main.sh
