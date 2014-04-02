@@ -1,0 +1,8 @@
+# saved it here so at least I would have it committed somewhere
+cd /Users/petecarapetyan/work/demo/test/ 
+vagrant destroy -f
+vagrant up
+cd /Users/petecarapetyan/work/demo/jeff-chef-repo/ 
+knife node delete -y demo
+knife client delete -y demo
+knife bootstrap 192.168.33.44 --sudo -x vagrant -P vagrant -N "demo" -r "role[df_box_carrie]"

@@ -27,11 +27,11 @@ import org.apache.camel.builder.RouteBuilder;
 public class MyRouteBuilder extends RouteBuilder {
      
     public void configure() {
-// set the ftp target directory, also first use of ssh to set known_hosts file, seems to be required for sftp to work later
+// set the ftp target directory, also first use of ssh to set known_hosts file which seems to be required for sftp to work later
       from("timer:foo?repeatCount=1")
-      .setBody(constant("mkdir -p <%= datasource.ftpTargetDir %>"))
-      .to("ssh://cloudera@192.168.2.63?password=cloudera&useFixedDelay=true&delay=1")
-      .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
+      .setBody(constant("mkdir -p <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>"))
+      .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true")
+      .to("ssh://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>?password=<%= datasource.hadoopVmPassword %>&useFixedDelay=true&delay=5000");
       
 // copy any data files which appear in the ETL drop folder to processing folder to run toAvro
         from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
@@ -42,26 +42,20 @@ public class MyRouteBuilder extends RouteBuilder {
         from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform?include=.*.csv")
         .log("toAvro transformation: ${in.header.CamelFileName}")
 		.to("avroetl:abar?outputFilePath=<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform/<%= datasource.tableName %>&delimiter=,&exceptionOnBadData=false&className=<%= datasource.className %>&namespace=<%= datasource.packageName %>");
-		
-//now, move newly created avro files back to ETL drop folder
+
+// copy all files to the hadoop server input folder
         from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform")
         .log("moved file after avro transformation: ${in.header.CamelFileName}")
-        //.to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:2222/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");
-       .to("sftp://<%= datasource.hadoopVmSshIpAddress %>:<%= datasource.sshPort %>/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>&username=<%= datasource.hadoopVmUserName %>&knownHostsFile=<%= datasource.serverHome %>/.ssh/known_hosts");	
-
-//copy all files to the hadoop server input folder
-//        from("file:<%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>?noop=true")
-//        .log("copied all files to server: ${in.header.CamelFileName}")
-//        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");	
+        .to("sftp://<%= datasource.hadoopVmSshIpAddress %>:<%= datasource.sshPort %>/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>&username=<%= datasource.hadoopVmUserName %>&knownHostsFile=<%= datasource.serverHome %>/.ssh/known_hosts");	
         
 // move the program files too - these should only move first time, after that this should not have any effect
-//        from("file:bin?noop=true")
-//        .to("sftp://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>:/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>");
+        from("file:bin?noop=true&include=run.*")
+        .to("sftp://<%= datasource.hadoopVmSshIpAddress %>:<%= datasource.sshPort %>/<%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>?password=<%= datasource.hadoopVmPassword %>&username=<%= datasource.hadoopVmUserName %>&knownHostsFile=<%= datasource.serverHome %>/.ssh/known_hosts");	
         
 // run hive commands to inject data from the hadoop vm into the hive tables
-//        from("timer:foo?period=10000")
-//        .setBody(constant("./runhive.sh"))
-//        .to("ssh://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>?password=<%= datasource.hadoopVmPassword %>&useFixedDelay=true&delay=5000")
-//        .to("log:org.apache.camel.builder.MyRouteBuilder?showAll=true&multiline=true");
+        from("timer:foo?delay=10000&period=10000")
+        .setBody(constant("source <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/run.sh"))
+        .to("ssh://<%= datasource.hadoopVmUserName %>@<%= datasource.hadoopVmSshIpAddress %>?password=<%= datasource.hadoopVmPassword %>&useFixedDelay=true&delay=5000")
+      	.log("ran run.sh for run.hive");
     }
 }
