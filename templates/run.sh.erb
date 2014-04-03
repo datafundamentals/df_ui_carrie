@@ -13,6 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # 
-# mv <%= datasource.hiveDb %> <%= datasource.hdfsDir %>/etl_date=$YYYY_MM_DD
 
-echo 'hi' > yomama.txt
+YYYY_MM_DD=$(date +%Y-%m-%d)
+
+hdfs dfs -mkdir <%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/schema
+hdfs dfs -mkdir <%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD
+hdfs dfs -put <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/<%= datasource.tableName %>.avsc <%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/schema
+hdfs dfs -put <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/<%= datasource.tableName %>.avro <%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD
+hdfs dfs -chmod -R 777 <%= datasource.hdfsDir %>
+
+echo "ALTER TABLE <%= datasource.tableName %> ADD IF NOT EXISTS PARTITION (etl_date='$YYYY_MM_DD') LOCATION 'hdfs://localhost.localdomain:8020/user/cloudera/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD';" > <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/runAlterTable.hive
+
+hive -f <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/run.hive
+hive -f <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/runAlterTable.hive

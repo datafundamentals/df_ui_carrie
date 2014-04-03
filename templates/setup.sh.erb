@@ -16,11 +16,13 @@
 sudo chown -R vagrant:vagrant .m2
 sudo mkdir -p -m 766 <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>
 sudo mkdir -p -m 766 <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform
+sudo mkdir -p -m 766 <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transformed
 sudo mkdir -p -m 766 <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>
 sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/work
 sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>
 sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>
 sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transform
+sudo chown -R vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>/<%= datasource.uniqueName %>/transformed
 sudo chown vagrant:vagrant <%= datasource.serverHome %>/<%= datasource.etlDropFolder %>
 sudo mv <%= datasource.serverHome %>/<%= datasource.uniqueName %> <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>
 sudo rm <%= datasource.serverHome %>/<%= datasource.workspaceFolder %>/<%= datasource.uniqueName %>/bin/setup.sh
