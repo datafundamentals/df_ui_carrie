@@ -12,6 +12,6 @@ CREATE EXTERNAL TABLE IF NOT EXISTS <%= datasource.tableName %>
   'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
   OUTPUTFORMAT
   'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
-  LOCATION 'hdfs://localhost.localdomain:8020/user/cloudera/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data'
+  LOCATION '<%= datasource.hdfsBase %>/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data'
   TBLPROPERTIES (
-    'avro.schema.url'='hdfs://localhost.localdomain:8020/user/cloudera/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/schema/<%= datasource.tableName %>.avsc');
+    'avro.schema.url'='<%= datasource.hdfsBase %>/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/schema/<%= datasource.tableName %>.avsc');

@@ -328,4 +328,12 @@ class DataSource
   def sshPort
     @sshPort
   end
+
+  def hdfsBase=(value)
+    @hdfsBase = value
+  end
+
+  def hdfsBase
+    @hdfsBase
+  end
 end

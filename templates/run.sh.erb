@@ -22,7 +22,7 @@ hdfs dfs -put <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= da
 hdfs dfs -put <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/<%= datasource.tableName %>.avro <%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD
 hdfs dfs -chmod -R 777 <%= datasource.hdfsDir %>
 
-echo "ALTER TABLE <%= datasource.tableName %> ADD IF NOT EXISTS PARTITION (etl_date='$YYYY_MM_DD') LOCATION 'hdfs://localhost.localdomain:8020/user/cloudera/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD';" > <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/runAlterTable.hive
+echo "ALTER TABLE <%= datasource.tableName %> ADD IF NOT EXISTS PARTITION (etl_date='$YYYY_MM_DD') LOCATION '<%= datasource.hdfsBase %>/<%= datasource.hdfsDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/data/etl_date=$YYYY_MM_DD';" > <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/runAlterTable.hive
 
 hive -f <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/run.hive
 hive -f <%= datasource.ftpTargetDir %>/<%= datasource.uniqueName %>/<%= datasource.tableName %>/runAlterTable.hive

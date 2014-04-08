@@ -33,7 +33,7 @@
 	<div class="form-group">
 		<label for="hadoopVmSshIpAddress">Hadoop VM ip address</label>
 		<span class="help-block">192.168.2.63 for cloudera, 127.0.0.1 for hortonworks</span>
-		<input type="text" class="form-control" id="hadoopVmSshIpAddress"  name="hadoopVmSshIpAddress" value="127.0.0.1">
+		<input type="text" class="form-control" id="hadoopVmSshIpAddress"  name="hadoopVmSshIpAddress" value="192.168.2.63">
 	</div>
 	<br>
 	<br>
@@ -41,14 +41,23 @@
 	<div class="form-group">
 		<label for="hadoopVmUserName">Hadoop User Name</label>
 		<span class="help-block">cloudera for cloudera, root for hortonworks</span>
-		<input type="text" class="form-control" id="hadoopVmUserName"  name="hadoopVmUserName" value="root">
+		<input type="text" class="form-control" id="hadoopVmUserName"  name="hadoopVmUserName" value="cloudera">
 	</div>
 	<br>
 	<br>
 	<br>
 	<div class="form-group">
 		<label for="hadoopVmPassword">Hadoop VM password</label>
-		<input type="text" class="form-control" id="hadoopVmPassword"  name="hadoopVmPassword" value="hadoop">
+		<span class="help-block">cloudera for cloudera, hadoop for hortonworks</span>
+		<input type="text" class="form-control" id="hadoopVmPassword"  name="hadoopVmPassword" value="cloudera">
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="form-group">
+		<label for="hdfsBase">Hdfs Base</label>
+		<span class="help-block">hdfs://localhost.localdomain:8020/user/cloudera/ for cloudera, root for hortonworks</span>
+		<input type="text" class="form-control" id="hdfsBase"  name="hdfsBase" value="hdfs://localhost.localdomain:8020/user/cloudera/">
 	</div>
 	<br>
 	<br>

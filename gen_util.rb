@@ -29,6 +29,7 @@ def consumeDatasourceParams (params, datasource)
   datasource.className = setStringValue params['className'], datasource.className
   datasource.packageName = setStringValue params['packageName'], datasource.packageName
   datasource.sshPort = setStringValue params['sshPort'], datasource.sshPort
+  datasource.hdfsBase = setStringValue params['hdfsBase'], datasource.hdfsBase
   
 end
 
@@ -85,9 +86,6 @@ end
 def isCompleteForSchemaDataOption1(datasource)
   ready = true
   if datasource.schemaData =='1' then
-    if isEmptyNil datasource.pastedColHeads then
-    ready = false
-    end
     if isEmptyNil datasource.colHeadDelimiter then
     ready = false
     end
