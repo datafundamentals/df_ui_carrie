@@ -50,6 +50,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 		</maven.shade.version>
 		<camel.version>2.13.0</camel.version>
 		<slf4j.version>1.7.6</slf4j.version>
+		<maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -264,6 +265,25 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 							</mode>
 						</manifestEntries>
 					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${maven.bundle.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.artifactId}</Bundle-Name>
+						<Bundle-SymbolicName><%= datasource.uniqueName %></Bundle-SymbolicName>
+						<Export-Package>
+							*
+						</Export-Package>
+						<Import-Package>*</Import-Package>
+						<DynamicImport-Package>*</DynamicImport-Package>
+						<Implementation-Title><%= datasource.uniqueName %> OSGi</Implementation-Title>
+						<Implementation-Version>${project.version}</Implementation-Version>
+					</instructions>
 				</configuration>
 			</plugin>
 
